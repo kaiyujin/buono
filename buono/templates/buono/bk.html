@@ -1,14 +1,23 @@
-{% extends "base.html" %}{% load static %}
-{% block title %}buono 一覧{% endblock %}
-{% block header %}
+<!DOCTYPE html>{% load static %}
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>buono</title>
+    <link href="{% static 'buono/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'buono/css/style.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
 	<div class="col-md-10">
 	  <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
 	</div>
 	<div class="col-md-2">
 	  <button type="button" style="margin-top:20px" class="btn btn-sm btn-info">自分をbuono</button>
 	</div>
-{% endblock %}
-{% block content %}
+      </div>
       <div class="row" style="padding-top:30px;">
 	<div class="col-md-2">
 	  <div class="panel panel-info">
@@ -66,7 +75,6 @@
 	  </table>
 	</div>
       </div>
-{% endblock %}
       <div class="row">
 	<div class="col-md-12">
 	  <p class="text-center">ebisol inc.</p>
