@@ -1,0 +1,10 @@
+mysql> create database buono;
+pip3 install mysqlclient
+python3 manage.py migrate
+python3 manage.py makemigrations buono
+manage.py sqlmigrate buono 0001
+python3 manage.py migrate
+python3 manage.py createsuperuser
+	Username (leave blank to use 'shiraishidaisuke'): admin
+	Email address: shiraishi@ebisol.co.jp
+	Password: adminadmin
