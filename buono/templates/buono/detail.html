@@ -1,0 +1,101 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}buono 詳細{% endblock %}
+{% block content %}
+<div class="row" style="padding-top:30px;">
+  <div class="col-md-2">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+	<h3 class="panel-title">Panel title </h3>
+      </div>
+      <div class="panel-body panel-border">2016年</div>
+      <div class="panel-body">2015年</div>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <h3>「アプリの速さ」を改善したらユーザーの継続率が2〜3％上がった。</h3>
+    <pre>
+      記事の判定で「ここは苦労するな」というところはありますか？
+      例えば「同音異義語」です。スズキ(車)とスズキ(魚)の話題を見分けるのってすごく難しいんですよ。
+      字面だけでは見分けられないので、文章のコンテクスト（文脈）を理解しないといけなくて。
+
+      そのためには、例えば「海」「漁業」「鮮度」などの関連語が入っていたら
+      「これは魚の話だな」と判断できるように、裏側の辞書に「関連語」を地道に手入力していく必要があるわけです。
+      そうしたテクノロジーだけでは解決できないところは、泥臭く「人の手」を入れていますね。
+      とくにカメリオの場合、ビジネス〜アニメまで広いジャンルを対象にしているので、
+      いろいろなニーズに対応できないといけなく、そこは簡単ではないなと感じます。
+    </pre>
+    <div>
+      <ul class="nav nav-pills" style="width=150px;margin-right:20px;float:left">
+	<li class="active">
+	  <a href="#"> <span class="badge pull-right">42</span>buono!&nbsp;</a>
+	</li>
+      </ul>
+      <div style="float:left;">
+	<button id="modal-971041" type="button" href="#modal-container-971041" class="btn btn-md btn-info" data-toggle="modal">Add comment</button>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="modal fade in" id="modal-container-971041" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	      ×
+	    </button>
+	    <h4 class="modal-title" id="myModalLabel">
+	      title
+	    </h4>
+	  </div>
+	  <div class="modal-body">
+	    おほめの言葉
+	  </div>
+	  <div class="modal-footer">
+
+	    <button type="button" class="btn btn-default" data-dismiss="modal">
+	      Close
+	    </button>
+	    <button type="button" class="btn btn-primary">
+	      Save changes
+	    </button>
+	  </div>
+	</div>
+
+      </div>
+
+    </div>
+
+    <div class="row" style="margin-top:20px">
+      <div class="col-md-6">
+	<div class="panel panel-info">
+	  <div class="panel-body">すごいですやん</div>
+	</div>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+	<div class="panel panel-info">
+	  <div class="panel-body">
+	    <p>そこにしびれる。</p>
+	    <p>あこがれる！</p>
+	  </div>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+      <div class="row">
+	<div class="col-md-12">
+	  <p class="text-center">ebisol inc.</p>
+	</div>
+      </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

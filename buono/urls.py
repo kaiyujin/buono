@@ -5,4 +5,5 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^(?P<generation_id>[0-9]+)/$', views.listForGeneration, name='listForGeneration'),
+    url(r'^appealPoint/(?P<appealPointId>[0-9]+)/$', views.detail, name='appealPoint'),
 ]

@@ -34,34 +34,15 @@
 	      </tr>
 	    </thead>
 	    <tbody>
-	      <tr>
+	    {% for appealPoint in appealPoints %}
+	      <tr{% if forloop.counter0|divisibleby:"2" %}{% else %} class="success"{% endif %}>
 		<td>1</td>
-		<td>高萩 久美子</td>
-		<td> なにかの改善</td>
-		<td> 2016/08/07</td>
-		<td><button type="button" class="btn btn-sm btn-info">詳細</button></td>
+		<td>{{appealPoint.user}}</td>
+		<td>{{appealPoint.title}}</td>
+		<td>{{appealPoint.updTm}}</td>
+		<td><button type="button" onClick="location.href='{% url 'appealPoint' appealPoint.id %}'" class="btn btn-sm btn-info">詳細</button></td>
 	      </tr>
-	      <tr class="success">
-		<td>1</td>
-		<td>高萩 久美子</td>
-		<td> なにかの改善</td>
-		<td> 2016/08/07</td>
-		<td><button type="button" class="btn btn-sm btn-info">詳細</button></td>
-	      </tr>
-	      <tr>
-		<td>1</td>
-		<td>高萩 久美子</td>
-		<td> なにかの改善</td>
-		<td> 2016/08/07</td>
-		<td><button type="button" class="btn btn-sm btn-info">詳細</button></td>
-	      </tr>
-	      <tr class="success">
-		<td>1</td>
-		<td>高萩 久美子</td>
-		<td> なにかの改善</td>
-		<td> 2016/08/07</td>
-		<td><button type="button" class="btn btn-sm btn-info">詳細</button></td>
-	      </tr>
+	    {% endfor %}
 	    </tbody>
 	  </table>
 	</div>
