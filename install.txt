@@ -1,4 +1,7 @@
 mysql> create database buono;
+mysql> create user mysql;
+mysql> SET PASSWORD FOR user = PASSWORD('mysql')
+mysql> grant all *.* to mysql;
 pip3 install mysqlclient
 python3 manage.py migrate
 python3 manage.py makemigrations buono
@@ -8,3 +11,4 @@ python3 manage.py createsuperuser
 	Username (leave blank to use 'shiraishidaisuke'): admin
 	Email address: shiraishi@ebisol.co.jp
 	Password: adminadmin
+python3 manage.py runserver

@@ -30,3 +30,13 @@ def detail(request, appealPointId):
         'appealPoint'  : appealPoint,
     }
     return render(request, 'buono/detail.html', context)
+
+def update(request):
+    context = {
+    }
+    return render(request, 'buono/update.html', context)
+
+def updated(request):
+    context = {
+    }
+    return render(request, 'buono/update.html', context)

@@ -1,0 +1,46 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}buono 一覧{% endblock %}
+{% block header %}
+	<div class="col-md-12">
+	  <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
+	</div>
+{% endblock %}
+{% block content %}
+      <div class="row" style="padding-top:30px;">
+	<div class="col-md-2">
+	  <div class="panel panel-info">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Panel title </h3>
+	    </div>
+	    {% for generation in generations %}
+	    <div class="panel-body panel-border">
+	      <a href="{% url 'listForGeneration' generation.id %}">{{generation.name }}</a>
+	    </div>
+	    {% endfor %}
+	  </div>
+	</div>
+	<div class="col-md-10">
+	  <form name="updateAppealPointForm" action="{% url 'appealPointUpdated' %}" method="POST" >{% csrf_token %}
+	    <div>
+	      <p>この上半期に手がけた仕事の中で、「最も美味しくできた！自慢したい！」という取り組みを教えてください</p>
+	      <textarea id="task" name="task"       cols="100" rows="10" maxlength="5000" placeholder="＊１つの取り組みに絞って書いてください（半期の仕事を網羅的に書くのではなく、最も自信のある1つの取り組みを記載ください&#13;&#10;＊他のメンバーとの協業タスクでもOKです。協業タスクの場合は、自身の担当部分を明確に書いてください"></textarea>
+	    </div>
+	    <div>
+	      <p>その取り組みのプロセスと、工夫した点やこだわった点を教えてください</p>
+	      <textarea id="process" name="process" cols="100" rows="10" maxlength="5000" placeholder=""></textarea>
+	    </div>
+	    <div>
+	      <p>その取り組みの成果を教えてください（まだ結果が出ていないものは、想定される成果を書いてください）</p>
+	      <textarea id="result" name="result"   cols="100" rows="10" maxlength="5000" placeholder=""></textarea>
+	    </div>
+	    <div>
+	      <p>なぜこの取り組みを行うことができたのか、何があなたの原動力になったのかを教えてください</p>
+	      <textarea id="force" name="force"     cols="100" rows="10" maxlength="5000" placeholder=""></textarea>
+	    </div>
+	    <button type="submit" style="margin-top:20px" class="btn btn-sm btn-info" >Update</button>
+	  </form>
+	</div>
+      </div>
+{% endblock %}
+{% block modal %}
+{% endblock %}

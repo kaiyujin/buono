@@ -9,13 +9,14 @@ class Generation(models.Model):
     def __str__ (self): return self.name
 
 class AppealPoint(models.Model):
-    title = models.CharField(max_length=200)
-    detail = models.TextField()
+    task = models.TextField()
+    process = models.TextField()
+    result = models.TextField()
+    force = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     generation = models.ForeignKey(Generation, on_delete=models.CASCADE)
     insTm = models.DateTimeField(auto_now_add=True)
     updTm = models.DateTimeField(auto_now=True)
-    def __str__ (self): return self.title
 
 class Vote(models.Model):
     appealPoint = models.ForeignKey(AppealPoint, on_delete=models.CASCADE)
