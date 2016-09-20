@@ -1,9 +1,11 @@
 {% extends "base.html" %}{% load static %}
 {% block title %}buono 一覧{% endblock %}
 {% block header %}
-	<div class="col-md-12">
-	  <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
-	</div>
+<div class="col-md-12">
+    <a href="{% url 'index' %}">
+      <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
+    </a>
+</div>
 {% endblock %}
 {% block content %}
       <div class="row" style="padding-top:30px;">
@@ -38,6 +40,7 @@
 	      <textarea id="force" name="force"     cols="100" rows="10" maxlength="5000" placeholder=""></textarea>
 	    </div>
 	    <button type="submit" style="margin-top:20px" class="btn btn-sm btn-info" >Update</button>
+	    <input type="hidden" name="generationId" value="{{ generationId }}" />
 	  </form>
 	</div>
       </div>

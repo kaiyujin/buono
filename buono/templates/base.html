@@ -13,7 +13,9 @@
       <div class="row">
 	{% block header %}
 	<div class="col-md-12">
-	  <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
+	  <a href="{% url 'index' %}">
+	    <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
+	  </a>
 	</div>
 	{% endblock %}
       </div>
