@@ -21,6 +21,7 @@ class AppealPoint(models.Model):
 
 class Vote(models.Model):
     appealPoint = models.ForeignKey(AppealPoint, on_delete=models.CASCADE)
+    typeCd = models.CharField(max_length=1)    
     insTm = models.DateTimeField(auto_now_add=True)
     updTm = models.DateTimeField(auto_now=True)
 
