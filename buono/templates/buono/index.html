@@ -7,22 +7,12 @@
   </a>
 </div>
 <div class="col-md-2">
-	  <button type="button" style="margin-top:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' generation.id %}'">自分をbuono</button>
+	  <button type="button" style="margin-top:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' %}'">自分をbuono</button>
 	</div>
 {% endblock %}
 {% block content %}
       <div class="row" style="padding-top:30px;">
 	<div class="col-md-2">
-	  <div class="panel panel-info">
-	    <div class="panel-heading">
-	      <h3 class="panel-title">Panel title </h3>
-	    </div>
-	    {% for generation in generations %}
-	    <div class="panel-body panel-border">
-	      <a href="{% url 'listForGeneration' generation.id %}">{{generation.name }}</a>
-	    </div>
-	    {% endfor %}
-	  </div>
 	</div>
 	<div class="col-md-10">
 	  <table class="table">
