@@ -43,3 +43,7 @@ def update(request):
     }
     appealPoint.save()
     return render(request, 'buono/update.html', context)
+
+def vote(request):
+
+    return render(request, 'buono/update.html', context)
