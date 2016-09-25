@@ -163,7 +163,7 @@ LOGGING = {
 if os.environ.get('PRODUCTION') == 'True':
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=400)
-    DATABASES['default'].update(db_from_env)
+    DATABASES = {['default'].update(db_from_env)}
     DEBUG = False
     TEMPLATE_DEBUG = False
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
