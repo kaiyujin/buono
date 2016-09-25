@@ -158,3 +158,23 @@ LOGGING = {
         },
     },
 }
+#本番設定
+if os.environ.get('PRODUCTION') == 'True':
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=400)
+    DATABASES['default'].update(db_from_env)
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # Allow all host headers
+    ALLOWED_HOSTS = ['*']
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+    # Static files (CSS, JavaScript, Images)
+    # https://docs.djangoproject.com/en/1.9/howto/static-files/
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+    STATIC_URL = '/static/'
+    # Extra places for collectstatic to find static files.
+    STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'),)
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

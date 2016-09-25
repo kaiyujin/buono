@@ -1,10 +1,16 @@
 {% extends "base.html" %}{% load static %}
 {% block title %}buono 一覧{% endblock %}
 {% block header %}
-<div class="col-md-12">
-    <a href="{% url 'index' %}">
-      <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
-    </a>
+<div class="col-md-6">
+  <a href="{% url 'index' %}">
+    <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
+  </a>
+</div>
+<div class="col-md-4" style="text-align:right;margin-top:20px;">
+  <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'index' %}'">一覧に戻る</button>
+  <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'appealPointUpdate' %}'">ログアウト</button>
+</div>
+<div class="col-md-2">
 </div>
 {% endblock %}
 {% block content %}
@@ -29,7 +35,10 @@
 	      <p>なぜこの取り組みを行うことができたのか、何があなたの原動力になったのかを教えてください</p>
 	      <textarea id="force" name="force"     cols="100" rows="10" maxlength="5000" placeholder="">{{appealPoint.force}}</textarea>
 	    </div>
-	    <button type="submit" style="margin-top:20px" class="btn btn-sm btn-info" >Update</button>
+	    <div style="margin-top:20px;">
+	      <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'index' %}'">一覧へ戻る</button>
+	      <button type="submit" class="btn btn-sm btn-info" style="margin-left:550px">更新する</button>
+	    </div>
 	  </form>
 	</div>
       </div>

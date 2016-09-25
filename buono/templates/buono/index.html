@@ -1,20 +1,23 @@
 {% extends "base.html" %}{% load static %}
 {% block title %}buono 一覧{% endblock %}
 {% block header %}
-<div class="col-md-10">
+<div class="col-md-6">
   <a href="{% url 'index' %}">
     <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
   </a>
 </div>
+<div class="col-md-4" style="text-align:right;margin-top:20px;">
+  <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' %}'">自分をbuono</button>
+  <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'appealPointUpdate' %}'">ログアウト</button>
+</div>
 <div class="col-md-2">
-	  <button type="button" style="margin-top:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' %}'">自分をbuono</button>
-	</div>
+</div>
 {% endblock %}
 {% block content %}
       <div class="row" style="padding-top:30px;">
 	<div class="col-md-2">
 	</div>
-	<div class="col-md-10">
+	<div class="col-md-8">
 	  <table class="table">
 	    <thead>
 	      <tr>
@@ -35,6 +38,8 @@
 	    {% endfor %}
 	    </tbody>
 	  </table>
+	</div>
+	<div class="col-md-2">
 	</div>
       </div>
 {% endblock %}

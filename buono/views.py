@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from .models import AppealPoint
-from .forms import AppealPointForm
+from .models import Comment
 import logging
 
 logger = logging.getLogger('model')
@@ -18,8 +19,10 @@ def index(request):
 @login_required
 def detail(request, appealPointId):
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
+    comments = Comment.objects.filter(appealPoint=appealPoint).order_by('-updTm')
     context = {
         'appealPoint'  : appealPoint,
+        'comments'     : comments,
     }
     return render(request, 'buono/detail.html', context)
 
@@ -44,6 +47,19 @@ def update(request):
     appealPoint.save()
     return render(request, 'buono/update.html', context)
 
+@login_required
 def vote(request):
 
     return render(request, 'buono/update.html', context)
+
+@login_required
+def addComment(request):
+    if request.method == 'GET':
+        return HttpResponseRedirect("/buono/")
+    appealPoint = get_object_or_404(AppealPoint, pk=request.POST['appealPointId'])
+    comment = Comment()
+    comment.appealPoint = appealPoint
+    comment.detail = request.POST['comment']
+    comment.user   = request.user
+    comment.save()
+    return HttpResponseRedirect("/buono/"+request.POST['appealPointId']+"/")
