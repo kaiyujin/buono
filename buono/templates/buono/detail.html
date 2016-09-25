@@ -8,7 +8,7 @@
 </div>
 <div class="col-md-4" style="text-align:right;margin-top:20px;">
   <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'index' %}'">一覧に戻る</button>
-  <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'appealPointUpdate' %}'">ログアウト</button>
+  <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'logout' %}'">ログアウト</button>
 </div>
 <div class="col-md-2">
 </div>
@@ -18,6 +18,19 @@
   <div class="col-md-2">
   </div>
   <div class="col-md-8">
+    <p style="float:left"><span>作成者：</span>
+      <span>{{appealPoint.user.last_name}}&nbsp;{{appealPoint.user.first_name}}</span>
+    </p>
+    <p style="float:right">
+    {% if prevAp != None %}
+    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' prevAp.id %}'">前へ</button>
+    {% endif %}
+    {% if nextAp != None %}
+    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' nextAp.id %}'">次へ</button>
+    {% endif %}
+    </p>
+    <div style="clear:both;"></div>
+    <hr>
     <h3>{{ appealPoint.title }}</h3>
     <p>
       この上半期に手がけた仕事の中で、「最も美味しくできた！自慢したい！」という取り組みを教えてください

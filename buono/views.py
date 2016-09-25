@@ -10,7 +10,7 @@ logger = logging.getLogger('model')
 
 @login_required
 def index(request):
-    appealPoints = AppealPoint.objects.order_by('-updTm').select_related()
+    appealPoints = AppealPoint.objects.order_by('-id').select_related()
     context = {
         'appealPoints' : appealPoints,
     }
@@ -19,10 +19,22 @@ def index(request):
 @login_required
 def detail(request, appealPointId):
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
+    nextAp = None
+    prevAp = None
+    try:
+        prevAp = AppealPoint.objects.get(user_id=appealPoint.id+1)
+    except ObjectDoesNotExist:
+        pass
+    try:
+        nextAp = AppealPoint.objects.get(user_id=appealPoint.id-1)
+    except ObjectDoesNotExist:
+        pass
     comments = Comment.objects.filter(appealPoint=appealPoint).order_by('-updTm')
     context = {
         'appealPoint'  : appealPoint,
         'comments'     : comments,
+        'nextAp'     : nextAp,
+        'prevAp'     : prevAp,
     }
     return render(request, 'buono/detail.html', context)
 

@@ -7,8 +7,8 @@
   </a>
 </div>
 <div class="col-md-4" style="text-align:right;margin-top:20px;">
-  <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' %}'">自分をbuono</button>
-  <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'appealPointUpdate' %}'">ログアウト</button>
+  <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' %}'">buonoを書く</button>
+  <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'logout' %}'">ログアウト</button>
 </div>
 <div class="col-md-2">
 </div>
@@ -30,8 +30,8 @@
 	    <tbody>
 	    {% for appealPoint in appealPoints %}
 	      <tr{% if forloop.counter0|divisibleby:"2" %}{% else %} class="success"{% endif %}>
-		<td>1</td>
-		<td>{{appealPoint.user}}</td>
+		<td>{{forloop.counter}}</td>
+		<td>{{appealPoint.user.last_name}}&nbsp;{{appealPoint.user.first_name}}</td>
 		<td>{{appealPoint.updTm}}</td>
 		<td><button type="button" onClick="location.href='{% url 'appealPoint' appealPoint.id %}'" class="btn btn-sm btn-info">詳細</button></td>
 	      </tr>

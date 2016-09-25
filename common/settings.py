@@ -24,9 +24,7 @@ SECRET_KEY = '0##eb61jzpk!q474hur^cb^k9(ccz1t6m#%1*sa!*rot@9ja1%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -71,7 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'common.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -110,15 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'ja'
-
 TIME_ZONE = 'Asia/Tokyo'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -167,8 +159,6 @@ if os.environ.get('PRODUCTION') == 'True':
     }
     # Honor the 'X-Forwarded-Proto' header for request.is_secure()
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # Allow all host headers
-    ALLOWED_HOSTS = ['*']
     PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
     # Static files (CSS, JavaScript, Images)
@@ -178,3 +168,4 @@ if os.environ.get('PRODUCTION') == 'True':
     # Extra places for collectstatic to find static files.
     STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, 'static'),)
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+    DEBUG=False

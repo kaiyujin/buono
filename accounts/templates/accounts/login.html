@@ -16,30 +16,34 @@
 	</div>
       </div>
       <div class="row" style="margin-top:30px;">
-	<div class="col-md-1">
-	</div>
 	<div class="col-md-4">
+	</div>
+	<div class="col-md-3">
 	  {% if form.errors  %}
 	  <div class="alert alert-danger" role="alert">
 	    <p>IDとパスワードが正しくないよ</p>
 	  </div>
 	  {% endif %}
-	  <form method="post" action="{% url 'login' %}">{% csrf_token %}
-	    <div>
-	      <p>ID</p>
-	      <p><input id="id_username" name="username" type="text" value="" maxlength="256" placeholder="Username" aria-describedby="sizing-addon1" autofocus required/></p>
+	  <div class="panel panel-info">
+	    <div class="panel-body">
+	      <form method="post" action="{% url 'login' %}">{% csrf_token %}
+		<div>
+		  <p>ID</p>
+		  <p><input id="id_username" name="username" type="text" value="" maxlength="256" placeholder="Username" aria-describedby="sizing-addon1" autofocus required/></p>
+		</div>
+		<div>
+		  <p>Password</p>
+		  <p><input id="id_password" name="password" type="password" value="" maxlength="256" placeholder="Pasword" aria-describedby="sizing-addon1" required/></p>
+		</div>
+		<div>
+		  <button type="submit" class="btn btn-sm btn-info">login</button>
+		  <input name="next" type="hidden" value="{{ next }}"/>
+		</div>
+	      </form>
 	    </div>
-	    <div>
-	      <p>Password</p>
-	      <p><input id="id_password" name="password" type="password" value="" maxlength="256" placeholder="Pasword" aria-describedby="sizing-addon1" required/></p>
-	    </div>
-	    <div>
-	      <button type="submit" class="btn btn-sm btn-info">login</button>
-	      <input name="next" type="hidden" value="{{ next }}"/>
-	    </div>
-	  </form>
+	  </div>
 	</div>
-	<div class="col-md-7">
+	<div class="col-md-5">
 	</div>
       </div>
       <div class="row" style="margin-top:80px">
