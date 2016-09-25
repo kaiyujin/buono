@@ -75,15 +75,16 @@ WSGI_APPLICATION = 'common.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'buono',
+if os.environ.get('PRODUCTION') != 'True':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'buono',
         'USER': 'mysql',
-        'PASSWORD': 'mysql',
-        'HOST': 'localhost',
+            'PASSWORD': 'mysql',
+            'HOST': 'localhost',
+        }
     }
-}
 
 
 # Password validation
