@@ -29,6 +29,7 @@ def detail(request, appealPointId):
 @login_required
 def update(request):
     appealPoint = None
+    message = ''
     try:
         appealPoint = AppealPoint.objects.get(user_id=request.user.id)
     except ObjectDoesNotExist:
@@ -39,12 +40,12 @@ def update(request):
         appealPoint.result  = request.POST['result']
         appealPoint.force   = request.POST['force']
         appealPoint.user    = request.user
-    message = '更新しました。'
+        appealPoint.save()
+        message = '更新しました。'
     context = {
         'message':message,
         'appealPoint' : appealPoint,
     }
-    appealPoint.save()
     return render(request, 'buono/update.html', context)
 
 @login_required
