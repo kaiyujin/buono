@@ -33,7 +33,8 @@
 		<td>{{forloop.counter}}</td>
 		<td>{{appealPoint.user.last_name}}&nbsp;{{appealPoint.user.first_name}}</td>
 		<td>{{appealPoint.updTm}}</td>
-		<td><button type="button" onClick="location.href='{% url 'appealPoint' appealPoint.id %}'" class="btn btn-sm btn-info">詳細</button></td>
+		<!--<td><button type="button" onClick="location.href='{% url 'appealPoint' appealPoint.id %}'" class="btn btn-sm btn-info">詳細</button></td>-->
+		<td><button type="button" onClick="location.href='{% url 'appealPoint' appealPoint.id %}'" class="btn btn-sm btn-info" disabled="true">詳細</button></td>
 	      </tr>
 	    {% endfor %}
 	    </tbody>

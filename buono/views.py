@@ -18,6 +18,7 @@ def index(request):
 
 @login_required
 def detail(request, appealPointId):
+    return HttpResponseRedirect("/buono/")
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
     nextAp = None
     prevAp = None
