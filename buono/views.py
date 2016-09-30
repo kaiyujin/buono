@@ -5,27 +5,31 @@ from django.http import HttpResponseRedirect
 from .models import AppealPoint
 from .models import Comment
 import logging
+from datetime import date
 
 logger = logging.getLogger('model')
+isVoteTerm = date(2016, 10, 4) <= date.today()
 
 @login_required
 def index(request):
     appealPoints = AppealPoint.objects.order_by('-id').select_related()
     context = {
         'appealPoints' : appealPoints,
+        'isVoteTerm' : isVoteTerm,
     }
     return render(request, 'buono/index.html', context)
 
 @login_required
 def detail(request, appealPointId):
-    return HttpResponseRedirect("/buono/")
+    if not isVoteTerm :
+        return HttpResponseRedirect("/buono/")
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
     nextAp = None
     prevAp = None
     try:
         prevAp = AppealPoint.objects.get(user_id=appealPoint.id+1)
     except ObjectDoesNotExist:
-        pass
+        pass;
     try:
         nextAp = AppealPoint.objects.get(user_id=appealPoint.id-1)
     except ObjectDoesNotExist:
@@ -36,11 +40,14 @@ def detail(request, appealPointId):
         'comments'     : comments,
         'nextAp'     : nextAp,
         'prevAp'     : prevAp,
+        'isVoteTerm' : isVoteTerm,
     }
     return render(request, 'buono/detail.html', context)
 
 @login_required
 def update(request):
+    if isVoteTerm :
+        return HttpResponseRedirect("/buono/")
     appealPoint = None
     message = ''
     try:
@@ -58,16 +65,21 @@ def update(request):
     context = {
         'message':message,
         'appealPoint' : appealPoint,
+        'isVoteTerm' : isVoteTerm,
     }
     return render(request, 'buono/update.html', context)
 
 @login_required
 def vote(request):
+    if not isVoteTerm :
+        return HttpResponseRedirect("/buono/")
 
     return render(request, 'buono/update.html', context)
 
 @login_required
 def addComment(request):
+    if not isVoteTerm :
+        return HttpResponseRedirect("/buono/")
     if request.method == 'GET':
         return HttpResponseRedirect("/buono/")
     appealPoint = get_object_or_404(AppealPoint, pk=request.POST['appealPointId'])
