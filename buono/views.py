@@ -8,7 +8,7 @@ from datetime import date
 
 logger = logging.getLogger('model')
 isVoteTerm = date(2016, 10, 4) <= date.today()
-#isVoteTerm = True #test
+isVoteTerm = True #test
 #isVoteTerm = False #test
 
 @login_required
@@ -30,6 +30,7 @@ def index(request):
     except ObjectDoesNotExist:
         commitedSemiBuono = False
     commnetCount = Comment.objects.filter(user_id=request.user.id).count()
+    part_timer = True if request.user.groups.filter(name='part_timer').exists() else False
     context = {
         'appealPoints' : appealPoints,
         'isVoteTerm' : isVoteTerm,
@@ -37,6 +38,7 @@ def index(request):
         'commitedSemiBuono' : commitedSemiBuono,
         'commnetCount' : commnetCount,
         'mineId' : mineId,
+        'part_timer' : part_timer
     }
     return render(request, 'buono/index.html', context)
 
@@ -48,6 +50,7 @@ def detail(request, appealPointId):
     comment, buono, semiBuono, nextAp, prevAp = ('',None,None,None,None)
     comments, buonoList, semiBuonoList = (None,None,None)
     alreadyBuono, alreadySemiBuono = (None, None)
+    part_timer = True if request.user.groups.filter(name='part_timer').exists() else False
     try:
         prevAp = AppealPoint.objects.get(user_id=appealPoint.id+1)
     except ObjectDoesNotExist:
@@ -95,6 +98,7 @@ def detail(request, appealPointId):
         'semiBuono' : semiBuono,
         'alreadyBuono' : alreadyBuono,
         'alreadySemiBuono' : alreadySemiBuono,
+        'part_timer' : part_timer,
     }
     return render(request, 'buono/detail.html', context)
 
