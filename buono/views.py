@@ -41,6 +41,7 @@ def detail(request, appealPointId):
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
     comment, buono, semiBuono, nextAp, prevAp = (None,None,None,None,None)
     comments, buonoList, semiBuonoList = (None,None,None)
+    alreadyBuono, alreadySemiBuono = (None, None)
     try:
         prevAp = AppealPoint.objects.get(user_id=appealPoint.id+1)
     except ObjectDoesNotExist:
@@ -60,10 +61,12 @@ def detail(request, appealPointId):
             pass;
         try:
             buono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='1')
+            alreadyBuono = Vote.objects.get(user_id=request.user.id,typeCd='1')
         except ObjectDoesNotExist:
             pass;
         try:
             semiBuono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='2')
+            alreadySemiBuono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='2')
         except ObjectDoesNotExist:
             pass;
     context = {
@@ -78,6 +81,8 @@ def detail(request, appealPointId):
         'comment' : comment,
         'buono' : buono,
         'semiBuono' : semiBuono,
+        'alreadyBuono' : alreadyBuono,
+        'alreadySemiBuono' : alreadySemiBuono,
     }
     return render(request, 'buono/detail.html', context)
 
@@ -119,12 +124,6 @@ def vote(request):
     vote.typeCd = request.POST['typeCd']
     vote.detail = request.POST['comment']
     vote.save()
-    return HttpResponseRedirect("/buono/"+request.POST['appealPointId']+"/")
-
-def semiVote(request):
-    if not isVoteTerm :
-        return HttpResponseRedirect("/buono/")
-    vote = Vote()
     return HttpResponseRedirect("/buono/"+request.POST['appealPointId']+"/")
 
 @login_required
