@@ -39,7 +39,7 @@ def detail(request, appealPointId):
     if not isVoteTerm :
         return HttpResponseRedirect("/buono/")
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
-    comment, buono, semiBuono, nextAp, prevAp = (None,None,None,None,None)
+    comment, buono, semiBuono, nextAp, prevAp = ('',None,None,None,None)
     comments, buonoList, semiBuonoList = (None,None,None)
     alreadyBuono, alreadySemiBuono = (None, None)
     try:
