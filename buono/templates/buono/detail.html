@@ -132,6 +132,21 @@
 </div>
 {% endfor %}
 {% endif %}
+{% if not isMine %}
+  {% if not buono == None %}
+<p>buonoに推薦しました。</p>
+<p>{{buono.detail}}</p>
+  {% endif %}
+  {% if not semiBuono == None %}
+<p>準buonoに推薦しました。</p>
+<p>{{semiBuono.detail}}</p>
+  {% endif %}
+  {% if not comment == None %}
+<hr>
+    <p>コメントしました。</p>
+    <p>{{comment.detail}}</p>
+  {% endif %}
+{% endif %}
 <div class="col-md-2">
 </div>
 </div>
@@ -147,7 +162,7 @@
 	  </div>
 	  <div class="modal-body">
 	    <form id="addComentForm" name="addComentForm" action="{% url 'addComment' %}" method="POST">{% csrf_token %}
-	      <textarea id="comment" name="comment" cols="75" rows="10" maxlength="5000" placeholder="賞賛のコメントをお願いします！&#13;&#10;何人にでもコメントできるからいい仕事をしたと思った人に沢山コメントあげてね！"></textarea>
+	      <textarea id="comment" name="comment" cols="75" rows="10" maxlength="5000" placeholder="賞賛のコメントをお願いします！&#13;&#10;何人にでもコメントできるからいい仕事をしたと思った人に沢山コメントあげてね！">{{comment}}</textarea>
 	      <input name="appealPointId" type="hidden" value="{{ appealPoint.id }}"/>
 	    </form>
 	  </div>

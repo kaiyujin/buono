@@ -24,7 +24,7 @@ def index(request):
         Vote.objects.get(typeCd='2' ,user_id=request.user.id)
     except ObjectDoesNotExist:
         commitedSemiBuono = False
-    commnetCount = Comment.objects.filter().count()
+    commnetCount = Comment.objects.filter(user_id=request.user.id).count()
     context = {
         'appealPoints' : appealPoints,
         'isVoteTerm' : isVoteTerm,
@@ -55,16 +55,16 @@ def detail(request, appealPointId):
         semiBuonoList = Vote.objects.filter(appealPoint_id=appealPoint.id,typeCd='2')
     else:
         try:
-            comment = Comment.objects.get(user_id=request.user.id)
-        except:
+            comment = Comment.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id)
+        except ObjectDoesNotExist:
             pass;
         try:
-            buono = Vote.objects.get(user_id=request.user.id,typeCd='1')
-        except:
+            buono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='1')
+        except ObjectDoesNotExist:
             pass;
         try:
-            semiBuono = Vote.objects.get(user_id=request.user.id,typeCd='2')
-        except:
+            semiBuono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='2')
+        except ObjectDoesNotExist:
             pass;
     context = {
         'appealPoint'  : appealPoint,
@@ -120,9 +120,13 @@ def addComment(request):
     if request.method == 'GET':
         return HttpResponseRedirect("/buono/")
     appealPoint = get_object_or_404(AppealPoint, pk=request.POST['appealPointId'])
-    comment = Comment()
-    comment.appealPoint = appealPoint
+    comment = None
+    try:
+        comment = Comment.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id)
+    except ObjectDoesNotExist:
+        comment = Comment()
+        comment.appealPoint = appealPoint
+        comment.user   = request.user
     comment.detail = request.POST['comment']
-    comment.user   = request.user
     comment.save()
     return HttpResponseRedirect("/buono/"+request.POST['appealPointId']+"/")
