@@ -110,8 +110,22 @@ def update(request):
 def vote(request):
     if not isVoteTerm :
         return HttpResponseRedirect("/buono/")
+    if request.method == 'GET':
+        return HttpResponseRedirect("/buono/")
+    appealPoint = get_object_or_404(AppealPoint, pk=request.POST['appealPointId'])
+    vote = Vote()
+    vote.appealPoint = appealPoint
+    vote.user = request.user
+    vote.typeCd = request.POST['typeCd']
+    vote.detail = request.POST['comment']
+    vote.save()
+    return HttpResponseRedirect("/buono/"+request.POST['appealPointId']+"/")
 
-    return render(request, 'buono/update.html', context)
+def semiVote(request):
+    if not isVoteTerm :
+        return HttpResponseRedirect("/buono/")
+    vote = Vote()
+    return HttpResponseRedirect("/buono/"+request.POST['appealPointId']+"/")
 
 @login_required
 def addComment(request):

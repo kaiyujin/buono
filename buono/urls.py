@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^(?P<appealPointId>[0-9]+)/$', views.detail, name='appealPoint'),
     url(r'^update/$', views.update, name='appealPointUpdate'),
     url(r'^addComment/$', views.addComment, name='addComment'),
+    url(r'^vote/$', views.vote, name='vote'),
     url(r'^logout/$', logout ,name="logout"),
 ]
