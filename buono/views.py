@@ -7,8 +7,8 @@ import logging
 from datetime import date
 
 logger = logging.getLogger('model')
-#isVoteTerm = date(2016, 10, 4) <= date.today()
-isVoteTerm = True #test
+isVoteTerm = date(2016, 10, 4) <= date.today()
+#isVoteTerm = True #test
 #isVoteTerm = False #test
 
 @login_required
@@ -16,6 +16,11 @@ def index(request):
     appealPoints = AppealPoint.objects.order_by('-id').select_related()
     commitedBuono = True
     commitedSemiBuono = True
+    mineId = None
+    try:
+        mineId = AppealPoint.objects.get(pk=request.user.id).id
+    except ObjectDoesNotExist:
+        pass
     try:
         Vote.objects.get(typeCd='1' ,user_id=request.user.id)
     except ObjectDoesNotExist:
@@ -31,6 +36,7 @@ def index(request):
         'commitedBuono' : commitedBuono,
         'commitedSemiBuono' : commitedSemiBuono,
         'commnetCount' : commnetCount,
+        'mineId' : mineId,
     }
     return render(request, 'buono/index.html', context)
 
@@ -61,12 +67,18 @@ def detail(request, appealPointId):
             pass;
         try:
             buono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='1')
+        except ObjectDoesNotExist:
+            pass;
+        try:
             alreadyBuono = Vote.objects.get(user_id=request.user.id,typeCd='1')
         except ObjectDoesNotExist:
             pass;
         try:
             semiBuono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='2')
-            alreadySemiBuono = Vote.objects.get(appealPoint_id=appealPoint.id,user_id=request.user.id,typeCd='2')
+        except ObjectDoesNotExist:
+            pass;
+        try:
+            alreadySemiBuono = Vote.objects.get(user_id=request.user.id,typeCd='2')
         except ObjectDoesNotExist:
             pass;
     context = {

@@ -1,16 +1,17 @@
 {% extends "base.html" %}{% load static %}
 {% block title %}buono 一覧{% endblock %}
 {% block header %}
-<div class="col-md-4">
+<div class="col-md-2">
   <a href="{% url 'index' %}">
     <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
   </a>
 </div>
-<div class="col-md-6" style="text-align:right;margin-top:20px;">
+<div class="col-md-8" style="text-align:right;margin-top:20px;">
   {% if isVoteTerm  %}
   buono賞:{% if commitedBuono %}投票済{% else %}<span style="color:red;">未投票</span>{% endif %}&nbsp;&nbsp;
   準buono賞:{% if commitedSemiBuono %}投票済{% else %}<span style="color:red;">未投票</span>{% endif %}&nbsp;&nbsp;
   コメントした数:{{ commnetCount }}件&nbsp;&nbsp;
+  <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' mineId %}'">自分のbuonoを見る</button>
   {% else  %}
   <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' %}'">buonoを書く</button>
   {% endif %}
