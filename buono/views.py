@@ -39,8 +39,8 @@ def detail(request, appealPointId):
     if not isVoteTerm :
         return HttpResponseRedirect("/buono/")
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
-    nextAp = None
-    prevAp = None
+    comment, buono, semiBuono, nextAp, prevAp = (None,None,None,None,None)
+    comments, buonoList, semiBuonoList = (None,None,None)
     try:
         prevAp = AppealPoint.objects.get(user_id=appealPoint.id+1)
     except ObjectDoesNotExist:
@@ -49,13 +49,35 @@ def detail(request, appealPointId):
         nextAp = AppealPoint.objects.get(user_id=appealPoint.id-1)
     except ObjectDoesNotExist:
         pass
-    comments = Comment.objects.filter(appealPoint=appealPoint).order_by('-updTm')
+    if request.user.id == appealPoint.id:
+        comments = Comment.objects.filter(appealPoint=appealPoint).order_by('-updTm')
+        buonoList = Vote.objects.filter(appealPoint_id=appealPoint.id,typeCd='1')
+        semiBuonoList = Vote.objects.filter(appealPoint_id=appealPoint.id,typeCd='2')
+    else:
+        try:
+            comment = Comment.objects.get(user_id=request.user.id)
+        except:
+            pass;
+        try:
+            buono = Vote.objects.get(user_id=request.user.id,typeCd='1')
+        except:
+            pass;
+        try:
+            semiBuono = Vote.objects.get(user_id=request.user.id,typeCd='2')
+        except:
+            pass;
     context = {
         'appealPoint'  : appealPoint,
         'comments'     : comments,
         'nextAp'     : nextAp,
         'prevAp'     : prevAp,
         'isVoteTerm' : isVoteTerm,
+        'isMine' : request.user.id == appealPoint.id,
+        'buonoList' : buonoList,
+        'semiBuonoList' : semiBuonoList,
+        'comment' : comment,
+        'buono' : buono,
+        'semiBuono' : semiBuono,
     }
     return render(request, 'buono/detail.html', context)
 

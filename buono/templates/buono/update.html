@@ -21,7 +21,7 @@
 	  <p style="color:red">{{message}}</p>
 	  <form name="updateAppealPointForm" action="{% url 'appealPointUpdate' %}" method="post" >{% csrf_token %}
 	    <div>
-	      <p>この上半期に手がけた仕事の中で、「最も美味しくできた！自慢したい！」という取り組みを教えてください</p>
+	      <p>この半期に手がけた仕事の中で、「最も美味しくできた！自慢したい！」という取り組みを教えてください</p>
 	      <textarea id="task" name="task" cols="100" rows="10" maxlength="5000" placeholder="＊１つの取り組みに絞って書いてください（半期の仕事を網羅的に書くのではなく、最も自信のある1つの取り組みを記載ください&#13;&#10;＊他のメンバーとの協業タスクでもOKです。協業タスクの場合は、自身の担当部分を明確に書いてください">{{appealPoint.task}}</textarea>
 	    </div>
 	    <div>
