@@ -2,20 +2,35 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
-from .models import AppealPoint
-from .models import Comment
+from .models import AppealPoint,Comment,Vote
 import logging
 from datetime import date
 
 logger = logging.getLogger('model')
-isVoteTerm = date(2016, 10, 4) <= date.today()
+#isVoteTerm = date(2016, 10, 4) <= date.today()
+isVoteTerm = True #test
+#isVoteTerm = False #test
 
 @login_required
 def index(request):
     appealPoints = AppealPoint.objects.order_by('-id').select_related()
+    commitedBuono = True
+    commitedSemiBuono = True
+    try:
+        Vote.objects.get(typeCd='1' ,user_id=request.user.id)
+    except ObjectDoesNotExist:
+        commitedBuono = False
+    try:
+        Vote.objects.get(typeCd='2' ,user_id=request.user.id)
+    except ObjectDoesNotExist:
+        commitedSemiBuono = False
+    commnetCount = Comment.objects.filter().count()
     context = {
         'appealPoints' : appealPoints,
         'isVoteTerm' : isVoteTerm,
+        'commitedBuono' : commitedBuono,
+        'commitedSemiBuono' : commitedSemiBuono,
+        'commnetCount' : commnetCount,
     }
     return render(request, 'buono/index.html', context)
 
