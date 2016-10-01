@@ -44,7 +44,8 @@ def index(request):
 
 @login_required
 def detail(request, appealPointId):
-    if not isVoteTerm :
+    isDmm = True if request.user.groups.filter(name='dmm').exists() else False
+    if not isVoteTerm and not isDmm:
         return HttpResponseRedirect("/buono/")
     appealPoint = get_object_or_404(AppealPoint, pk=appealPointId)
     comment, buono, semiBuono, nextAp, prevAp = ('',None,None,None,None)
