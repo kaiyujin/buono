@@ -8,7 +8,7 @@ from datetime import date
 
 logger = logging.getLogger('model')
 isVoteTerm = date(2016, 10, 4) <= date.today()
-#isVoteTerm = True #test
+isVoteTerm = True #test
 #isVoteTerm = False #test
 
 @login_required

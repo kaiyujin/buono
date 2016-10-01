@@ -35,26 +35,26 @@
     <p>
       この半期に手がけた仕事の中で、「最も美味しくできた！自慢したい！」という取り組みを教えてください
     </p>
-<pre>
-{{ appealPoint.task }}
-</pre>
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{appealPoint.task|linebreaks}}</div>
+    </div>
     <p>
       その取り組みのプロセスと、工夫した点やこだわった点を教えてください
     </p>
-<pre>
-{{ appealPoint.process }}
-</pre>
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{appealPoint.process|linebreaks}}</div>
+    </div>
     <p>
 その取り組みの成果を教えてください（まだ結果が出ていないものは、想定される成果を書いてください）      
     </p>
-<pre>
-{{ appealPoint.result }}
-</pre>
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{appealPoint.result|linebreaks}}</div>
+    </div>
     <p>
       なぜこの取り組みを行うことができたのか、何があなたの原動力になったのかを教えてください</p>
-<pre>
-{{ appealPoint.force }}
-</pre>
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{appealPoint.force|linebreaks}}</div>
+    </div>
 <div>
   <div style="padding-bottom:30px;padding-top:30px">
     <p style="float:right">
@@ -84,19 +84,10 @@
 </div>
 {% for comment in buonoList %}
 <div class="row" style="margin-top:20px">
-  <div class="col-md-6">
-    {% if forloop.counter0|divisibleby:"2" %}
-    <div class="panel panel-info">
-      <div class="panel-body">{{comment.detail}}</div>
+  <div class="col-md-12">
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{comment.detail|linebreaks}}</div>
     </div>
-    {% endif %}
-  </div>
-  <div class="col-md-6">
-    {% if forloop.counter|divisibleby:"2" %}
-    <div class="panel panel-info">
-      <div class="panel-body">{{comment.detail}}</div>
-    </div>
-    {% endif %}
   </div>
 </div>
 {% endfor %}
@@ -106,19 +97,10 @@
 </div>
 {% for comment in semiBuonoList %}
 <div class="row" style="margin-top:20px">
-  <div class="col-md-6">
-    {% if forloop.counter0|divisibleby:"2" %}
-    <div class="panel panel-info">
-      <div class="panel-body">{{comment.detail}}</div>
+  <div class="col-md-12">
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{comment.detail|linebreaks}}</div>
     </div>
-    {% endif %}
-  </div>
-  <div class="col-md-6">
-    {% if forloop.counter|divisibleby:"2" %}
-    <div class="panel panel-info">
-      <div class="panel-body">{{comment.detail}}</div>
-    </div>
-    {% endif %}
   </div>
 </div>
 {% endfor %}
@@ -128,19 +110,10 @@
 </div>
 {% for comment in comments %}
 <div class="row" style="margin-top:20px;">
-  <div class="col-md-6">
-    {% if forloop.counter0|divisibleby:"2" %}
-    <div class="panel panel-info">
-      <div class="panel-body">{{comment.detail}}</div>
+  <div class="col-md-12">
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{comment.detail|linebreaks}}</div>
     </div>
-    {% endif %}
-  </div>
-  <div class="col-md-6">
-    {% if forloop.counter|divisibleby:"2" %}
-    <div class="panel panel-info">
-      <div class="panel-body">{{comment.detail}}</div>
-    </div>
-    {% endif %}
   </div>
 </div>
 {% endfor %}
@@ -149,35 +122,42 @@
   {% if not buono == None %}
 <hr>
     <p>buonoに推薦しました。</p>
-    <p><pre>{{buono.detail}}</pre></p>
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{buono.detail|linebreaks}}</div>
+    </div>
   {% endif %}
   {% if not semiBuono == None %}
 <hr>
     <p>準buonoに推薦しました。</p>
-    <p><pre>{{semiBuono.detail}}</pre></p>
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{semiBuono.detail|linebreaks}}</div>
+    </div>
+    
   {% endif %}
   {% if comment != None and comment != '' %}
 <hr>
     <p>コメントしました。</p>
-    <p><pre>{{comment.detail}}</pre></p>
+    <div class="panel panel-info" style="word-break:break-all;">
+      <div class="panel-body">{{comment.detail|linebreaks}}</div>
+    </div>
   {% endif %}
 {% endif %}
 <div class="col-md-2">
 </div>
 </div>
 <div class="row">
-    <div class="modal fade in" id="modal-container-971041" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade in" id="modal-container-971041" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
       <div class="modal-dialog">
 	<div class="modal-content">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 	      ×
 	    </button>
-	    <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
+	    <h4 class="modal-title" id="myModalLabel1">&nbsp;</h4>
 	  </div>
 	  <div class="modal-body">
 	    <form id="addBuonoForm" name="addBuonoForm" action="{% url 'vote' %}" method="POST">{% csrf_token %}
-	      <textarea name="comment" cols="75" rows="10" maxlength="5000" placeholder="buono賞推薦コメントをお願いします！&#13;&#10;推薦は1名にしかできないから注意してね。"></textarea>
+	      <textarea id="bct" name="comment" cols="75" rows="10" maxlength="5000" placeholder="buono賞推薦コメントをお願いします！&#13;&#10;推薦は1名にしかできないから注意してね。"></textarea>
 	      <input name="appealPointId" type="hidden" value="{{ appealPoint.id }}"/>
 	      <input name="typeCd" type="hidden" value="1"/>
 	    </form>
@@ -194,18 +174,18 @@
       </div>
 </div>
 <div class="row">
-    <div class="modal fade in" id="modal-container-971042" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade in" id="modal-container-971042" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
       <div class="modal-dialog">
 	<div class="modal-content">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 	      ×
 	    </button>
-	    <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
+	    <h4 class="modal-title" id="myModalLabel2">&nbsp;</h4>
 	  </div>
 	  <div class="modal-body">
 	    <form id="addSemiBuonoForm" name="addSemiBuonoForm" action="{% url 'vote' %}" method="POST">{% csrf_token %}
-	      <textarea name="comment" cols="75" rows="10" maxlength="5000" placeholder="準buono賞推薦コメントをお願いします！&#13;&#10;推薦は1名にしかできないから注意してね。"></textarea>
+	      <textarea id="sbct" name="comment" cols="75" rows="10" maxlength="5000" placeholder="準buono賞推薦コメントをお願いします！&#13;&#10;推薦は1名にしかできないから注意してね。"></textarea>
 	      <input name="appealPointId" type="hidden" value="{{ appealPoint.id }}"/>
 	      <input name="typeCd" type="hidden" value="2"/>
 	    </form>
@@ -222,18 +202,18 @@
       </div>
 </div>
 <div class="row">
-    <div class="modal fade in" id="modal-container-971043" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade in" id="modal-container-971043" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
       <div class="modal-dialog">
 	<div class="modal-content">
 	  <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 	      ×
 	    </button>
-	    <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
+	    <h4 class="modal-title" id="myModalLabel3">&nbsp;</h4>
 	  </div>
 	  <div class="modal-body">
 	    <form id="addComentForm" name="addComentForm" action="{% url 'addComment' %}" method="POST">{% csrf_token %}
-	      <textarea id="comment" name="comment" cols="75" rows="10" maxlength="5000" placeholder="賞賛のコメントをお願いします！&#13;&#10;何人にでもコメントできるからいい仕事をしたと思った人に沢山コメントあげてね！">{{comment}}</textarea>
+	      <textarea id="ct"  name="comment" cols="75" rows="10" maxlength="5000" placeholder="賞賛のコメントをお願いします！&#13;&#10;何人にでもコメントできるからいい仕事をしたと思った人に沢山コメントあげてね！">{{comment}}</textarea>
 	      <input name="appealPointId" type="hidden" value="{{ appealPoint.id }}"/>
 	    </form>
 	  </div>
