@@ -18,7 +18,7 @@ def index(request):
     commitedSemiBuono = True
     mineId = None
     try:
-        mineId = AppealPoint.objects.get(pk=request.user.id).id
+        mineId = AppealPoint.objects.get(user_id=request.user.id).id
     except ObjectDoesNotExist:
         pass
     try:
