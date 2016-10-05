@@ -169,7 +169,7 @@ def showComment(request):
         return HttpResponseRedirect("/buono/")
     raw = my_custom_sql("""
 select
- vt.typeCd as type,
+ vt."typeCd" as type,
  concat(us.last_name,us.first_name) as to_name,
  concat(
  (select inus.last_name from auth_user inus where vt.user_id = inus.id),
@@ -179,7 +179,7 @@ from
  buono_vote vt
 inner join
  buono_appealpoint ap
-on vt.appealPoint_id = ap.id
+on vt."appealPoint_id" = ap.id
 inner join
   auth_user us
 on
@@ -196,7 +196,7 @@ from
   buono_appealpoint ap
 inner join
   buono_comment cm
-on cm.appealPoint_id = ap.id
+on cm."appealPoint_id" = ap.id
 inner join
   auth_user us
 on ap.user_id = us.id
