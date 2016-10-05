@@ -39,7 +39,7 @@ def index(request):
         'commitedSemiBuono' : commitedSemiBuono,
         'commnetCount' : commnetCount,
         'mineId' : mineId,
-        'part_timer' : part_timer
+        'part_timer' : part_timer,
         'dmm' : isDmm,
     }
     return render(request, 'buono/index.html', context)
