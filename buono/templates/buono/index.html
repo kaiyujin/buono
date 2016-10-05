@@ -19,7 +19,7 @@
   <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPointUpdate' %}'">buonoを書く</button>
   {% endif %}
 {% endif %}
-{% if dmm == True %}
+{% if dmm %}
   <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'showComment' %}'">コメントリスト</button>
 {% endif %}
   <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'logout' %}'">ログアウト</button>
