@@ -31,6 +31,7 @@ def index(request):
         commitedSemiBuono = False
     commnetCount = Comment.objects.filter(user_id=request.user.id).count()
     part_timer = True if request.user.groups.filter(name='part_timer').exists() else False
+    isDmm = True if request.user.groups.filter(name='dmm').exists() else False
     context = {
         'appealPoints' : appealPoints,
         'isVoteTerm' : isVoteTerm,
@@ -39,6 +40,7 @@ def index(request):
         'commnetCount' : commnetCount,
         'mineId' : mineId,
         'part_timer' : part_timer
+        'dmm' : isDmm,
     }
     return render(request, 'buono/index.html', context)
 
@@ -100,7 +102,6 @@ def detail(request, appealPointId):
         'alreadyBuono' : alreadyBuono,
         'alreadySemiBuono' : alreadySemiBuono,
         'part_timer' : part_timer,
-        'dmm' : isDmm,
     }
     return render(request, 'buono/detail.html', context)
 
