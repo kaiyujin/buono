@@ -100,6 +100,7 @@ def detail(request, appealPointId):
         'alreadyBuono' : alreadyBuono,
         'alreadySemiBuono' : alreadySemiBuono,
         'part_timer' : part_timer,
+        'dmm' : isDmm,
     }
     return render(request, 'buono/detail.html', context)
 
@@ -160,3 +161,58 @@ def addComment(request):
     comment.detail = request.POST['comment']
     comment.save()
     return HttpResponseRedirect("/buono/"+request.POST['appealPointId']+"/")
+
+@login_required
+def showComment(request):
+    isDmm = True if request.user.groups.filter(name='dmm').exists() else False
+    if not isDmm:
+        return HttpResponseRedirect("/buono/")
+    raw = my_custom_sql("""
+select
+ vt.typeCd as type,
+ concat(us.last_name,us.first_name) as to_name,
+ concat(
+ (select inus.last_name from auth_user inus where vt.user_id = inus.id),
+ (select inus.first_name from auth_user inus where vt.user_id = inus.id)) as from_name,
+ vt.detail
+from
+ buono_vote vt
+inner join
+ buono_appealpoint ap
+on vt.appealPoint_id = ap.id
+inner join
+  auth_user us
+on
+us.id = ap.user_id
+union
+select
+'-' as type,
+concat(us.last_name,us.first_name) as to_name,
+concat(
+(select inus.last_name from auth_user inus where cm.user_id = inus.id),
+(select inus.first_name from auth_user inus where cm.user_id = inus.id)),
+cm.detail
+from
+  buono_appealpoint ap
+inner join
+  buono_comment cm
+on cm.appealPoint_id = ap.id
+inner join
+  auth_user us
+on ap.user_id = us.id
+    order by type, to_name
+""")
+    resultList = []
+    tpl = list(raw)
+    for val in tpl:
+        resultList.append({'typecd':val[0],'to':val[1],'from':val[2],'detail':val[3],})
+    context = {
+        'raw' : resultList,
+    }
+    return render(request, 'buono/show_comment.html', context)
+
+def my_custom_sql(sql):
+    from django.db import connection, transaction
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    return cursor.fetchall()

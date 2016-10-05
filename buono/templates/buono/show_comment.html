@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% load static %}
+{% block title %}buono 一覧{% endblock %}
+{% block header %}
+<div class="col-md-2">
+  <a href="{% url 'index' %}">
+    <img alt="logo" src="{% static 'buono/images/buono-logo.png' %}">
+  </a>
+</div>
+<div class="col-md-8" style="text-align:right;margin-top:20px;">
+  <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'index' %}'">一覧に戻る</button>
+  <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'logout' %}'">ログアウト</button>
+</div>
+<div class="col-md-2">
+</div>
+{% endblock %}
+{% block content %}
+      <div class="row" style="padding-top:30px;">
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+  <table border="1" cellspacing="0" bordercolor="#000000">
+    <tr>
+      <th>type</th>
+      <th>投票された人</th>
+      <th>投票した人</th>
+      <th>コメント</th>
+    <tr/>
+    {% for result in raw %}
+    <tr>
+      <td>
+	{% if result.typecd == '1' %}
+	buono賞
+	{% endif %}
+	{% if result.typecd == '2' %}
+	準buono賞
+	{% endif %}
+	{% if result.typecd == '-' %}
+	コメント
+	{% endif %}
+      </td>
+    <td>{{result.to}}</td>
+    <td>{{result.from}}</td>
+    <td>{{result.detail|linebreaks}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+	</div>
+	<div class="col-md-2">
+	</div>
+      </div>
+{% endblock %}
+{% block modal %}
+{% endblock %}
+
+
