@@ -87,13 +87,18 @@ def detail(request, appealPointId):
             alreadySemiBuono = Vote.objects.get(user_id=request.user.id,typeCd='2')
         except ObjectDoesNotExist:
             pass;
+    mineId = None
+    try:
+        mineId = AppealPoint.objects.get(user_id=request.user.id).id
+    except ObjectDoesNotExist:
+        pass
     context = {
         'appealPoint'  : appealPoint,
         'comments'     : comments,
         'nextAp'     : nextAp,
         'prevAp'     : prevAp,
         'isVoteTerm' : isVoteTerm,
-        'isMine' : request.user.id == appealPoint.id,
+        'isMine' : mineId == appealPoint.id,
         'buonoList' : buonoList,
         'semiBuonoList' : semiBuonoList,
         'comment' : comment,
