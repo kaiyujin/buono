@@ -241,7 +241,7 @@ FROM
 GROUP BY
  v."typeCd",u.first_name || u.last_name
 ) AS tmp
-ORDER BY typecd,cnt
+ORDER BY typecd,cnt desc
 """)
     resultList = []
     tpl = list(raw)
