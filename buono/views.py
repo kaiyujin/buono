@@ -217,6 +217,42 @@ on ap.user_id = us.id
     }
     return render(request, 'buono/show_comment.html', context)
 
+@login_required
+def countBuono(request):
+    isDmm = True if request.user.groups.filter(name='dmm').exists() else False
+    if not isDmm:
+        return HttpResponseRedirect("/buono/")
+    raw = my_custom_sql("""
+SELECT
+    typecd,name,cnt
+FROM (
+SELECT
+ CASE v."typeCd"
+  WHEN '1' THEN 'buono'
+  WHEN '2' THEN '準buono' 
+  ELSE 'コメント'
+ END AS typecd
+ ,u.first_name || u.last_name AS name, COUNT(1) cnt
+FROM
+ buono_vote v INNER JOIN buono_appealpoint ba
+ ON v."appealPoint_id" = ba.id
+ INNER JOIN auth_user u
+ ON ba.user_id = u.id
+GROUP BY
+ v."typeCd",u.first_name || u.last_name
+) AS tmp
+ORDER BY typecd,cnt
+""")
+    resultList = []
+    tpl = list(raw)
+    for val in tpl:
+        resultList.append({'typecd':val[0],'name':val[1],'cnt':val[2],})
+    context = {
+        'raw' : resultList,
+    }
+    return render(request, 'buono/count_buono.html', context)
+
+
 def my_custom_sql(sql):
     from django.db import connection, transaction
     cursor = connection.cursor()

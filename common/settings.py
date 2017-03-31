@@ -75,10 +75,10 @@ WSGI_APPLICATION = 'common.wsgi.application'
 if os.environ.get('PRODUCTION') != 'True':
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'buono',
-        'USER': 'mysql',
-            'PASSWORD': 'mysql',
+        'USER': 'postgres',
+            'PASSWORD': '',
             'HOST': 'localhost',
         }
     }

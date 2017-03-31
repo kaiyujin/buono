@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^vote/$', views.vote, name='vote'),
     url(r'^logout/$', logout ,name="logout"),
     url(r'^showComment/$', views.showComment ,name="showComment"),
+    url(r'^countBuono/$', views.countBuono ,name="countBuono"),
 ]
