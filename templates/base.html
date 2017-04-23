@@ -38,7 +38,6 @@
     <link href="{% static 'css/uploadify.css' %}" rel='stylesheet'>
     <link href="{% static 'css/animate.min.css' %}" rel='stylesheet'>
 
-    <!-- jQuery -->
     <script src="{% static 'bower_components/jquery/jquery.min.js' %}"></script>
     <!-- The fav icon -->
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
@@ -161,7 +160,8 @@
                 </div>
             </div>
             <div class="box-content">
-                <!-- put your content here -->
+              <!-- put your content here -->
+	      <will-view></will-view>
             </div>
         </div>
     </div>
@@ -238,5 +238,8 @@
 <script src="{% static 'js/jquery.history.js' %}"></script>
 <!-- application script for Charisma demo -->
 <script src="{% static 'js/charisma.js' %}"></script>
+<script src="{% static 'tag/wcm/wilview.js' %}" type="riot/tag"></script>
+<script src="{% static 'js/riot+compiler.min.js' %}"></script>
+<script>riot.mount('will-view')</script>
 </body>
 </html>
