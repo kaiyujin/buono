@@ -232,7 +232,7 @@ SELECT
   WHEN '2' THEN '準buono' 
   ELSE 'コメント'
  END AS typecd
- ,u.first_name || u.last_name AS name, COUNT(1) cnt
+ ,u.last_name || u.first_name AS name, COUNT(1) cnt
 FROM
  buono_vote v INNER JOIN buono_appealpoint ba
  ON v."appealPoint_id" = ba.id
