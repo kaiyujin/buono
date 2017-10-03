@@ -239,7 +239,7 @@ FROM
  INNER JOIN auth_user u
  ON ba.user_id = u.id
 GROUP BY
- v."typeCd",u.first_name || u.last_name
+ v."typeCd",u.last_name || u.first_name
 ) AS tmp
 ORDER BY typecd,cnt desc
 """)
