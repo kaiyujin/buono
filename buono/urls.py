@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^logout/$', logout ,name="logout"),
     url(r'^showComment/$', views.showComment ,name="showComment"),
     url(r'^countBuono/$', views.countBuono ,name="countBuono"),
+    url(r'^yetVoteList/$', views.yetVoteList ,name="yetVoteList"),
 ]

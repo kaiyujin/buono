@@ -253,6 +253,45 @@ ORDER BY typecd,cnt desc
     return render(request, 'buono/count_buono.html', context)
 
 
+@login_required
+def yetVoteList(request):
+    isDmm = True if request.user.groups.filter(name='dmm').exists() else False
+    if not isDmm:
+        return HttpResponseRedirect("/buono/")
+    raw = my_custom_sql("""
+select
+  users.last_name ||  users.first_name as name
+from
+  auth_user users
+join
+(
+select id from auth_user
+except
+select
+  u.id
+  from
+    auth_user u join auth_user_groups g
+    on u.id = g.user_id
+    where g.group_id = '1'
+except
+select user_id from (
+ select user_id ,count(1) as cnt
+ from buono_vote
+ group by user_id
+) v
+) voted
+on users.id = voted.id
+""")
+    resultList = []
+    tpl = list(raw)
+    for val in tpl:
+        resultList.append({'name':val[0]})
+    context = {
+        'raw' : resultList,
+    }
+    return render(request, 'buono/yet_vote_list.html', context)
+
+
 def my_custom_sql(sql):
     from django.db import connection, transaction
     cursor = connection.cursor()

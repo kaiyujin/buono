@@ -21,9 +21,8 @@
 {% endif %}
 {% if dmm %}
   <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'showComment' %}'">コメントリスト</button>
-{% endif %}
-{% if dmm %}
   <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'countBuono' %}'">集計</button>
+  <button type="button" style="margin-right:20px" class="btn btn-sm btn-info" onClick="location.href='{% url 'yetVoteList' %}'">未投票者</button>
 {% endif %}
   <button type="button" class="btn btn-sm btn-primary" onClick="location.href='{% url 'logout' %}'">ログアウト</button>
 </div>
