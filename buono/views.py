@@ -146,7 +146,7 @@ def update(request):
         if len(appealPoint.result.strip().strip('　')) <= length:
             message += '3.成果は' + str(length) + '文字以上書いてください  '
         if len(appealPoint.force.strip().strip('　')) <= length:
-            message += '4.理由は' + str(length) + '文字以上書いてください  '
+            message += '4.原動力は' + str(length) + '文字以上書いてください  '
         if message == '':
             message = '更新しました。'
             appealPoint.save()
