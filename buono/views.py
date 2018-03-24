@@ -127,7 +127,7 @@ def update(request):
     if isVoteTerm:
         return HttpResponseRedirect("/buono/")
     appealPoint = None
-    message = None
+    message = ''
     try:
         appealPoint = AppealPoint.objects.get(user_id=request.user.id)
     except ObjectDoesNotExist:
@@ -139,15 +139,15 @@ def update(request):
         appealPoint.force = request.POST['force']
         appealPoint.user = request.user
         length = 100
-        if len(appealPoint.task.strip().strip('　')) >= length:
-            message = '1.取り組みは' + length + '文字以上書いてください'
-        if len(appealPoint.process.strip().strip('　')) >= length:
-            message = '2.プロセスは' + length + '文字以上書いてください'
-        if len(appealPoint.result.strip().strip('　')) >= length:
-            message = '3.成果は' + length + '文字以上書いてください'
-        if len(appealPoint.force.strip().strip('　')) >= length:
-            message = '4.理由は' + length + '文字以上書いてください'
-        if message = None:
+        if len(appealPoint.task.strip().strip('　')) <= length:
+            message += '1.取り組みは' + length + '文字以上書いてください<br>'
+        if len(appealPoint.process.strip().strip('　')) <= length:
+            message += '2.プロセスは' + length + '文字以上書いてください<br>'
+        if len(appealPoint.result.strip().strip('　')) <= length:
+            message += '3.成果は' + length + '文字以上書いてください<br>'
+        if len(appealPoint.force.strip().strip('　')) <= length:
+            message += '4.理由は' + length + '文字以上書いてください'
+        if message == '':
             message = '更新しました。'
             appealPoint.save()
     context = {
