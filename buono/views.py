@@ -139,8 +139,6 @@ def update(request):
         appealPoint.force = request.POST['force']
         appealPoint.user = request.user
         length = 100
-        if len(appealPoint.task.strip().strip('　')) <= length:
-            message += '1.取り組みは' + str(length) + '文字以上書いてください  '
         if len(appealPoint.process.strip().strip('　')) <= length:
             message += '2.プロセスは' + str(length) + '文字以上書いてください  '
         if len(appealPoint.result.strip().strip('　')) <= length:
