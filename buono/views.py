@@ -7,7 +7,7 @@ import logging
 from datetime import date
 
 logger = logging.getLogger('model')
-isVoteTerm = date(2018, 4, 3) <= date.today()
+isVoteTerm = date(2018, 4, 4) <= date.today()
 # isVoteTerm = True #test
 # isVoteTerm = False #test
 
