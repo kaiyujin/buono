@@ -22,11 +22,11 @@
       <span>{{appealPoint.user.last_name}}&nbsp;{{appealPoint.user.first_name}}</span>
     </p>
     <p style="float:right">
-    {% if prevAp != None %}
-    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' prevAp.id %}'">前へ</button>
-    {% endif %}
     {% if nextAp != None %}
-    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' nextAp.id %}'">次へ</button>
+    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' nextAp.id %}'">前へ</button>
+    {% endif %}
+    {% if prevAp != None %}
+    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' prevAp.id %}'">次へ</button>
     {% endif %}
     </p>
     <div style="clear:both;"></div>
@@ -58,11 +58,11 @@
 <div>
   <div style="padding-bottom:30px;padding-top:30px">
     <p style="float:right">
-    {% if prevAp != None %}
-    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' prevAp.id %}'">前へ</button>
-    {% endif %}
     {% if nextAp != None %}
-    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' nextAp.id %}'">次へ</button>
+    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' nextAp.id %}'">前へ</button>
+    {% endif %}
+    {% if prevAp != None %}
+    <button type="button" class="btn btn-sm btn-info" onClick="location.href='{% url 'appealPoint' prevAp.id %}'">次へ</button>
     {% endif %}
     </p>
     <div style="clear:both;"></div>
