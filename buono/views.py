@@ -58,13 +58,23 @@ def detail(request, appealPointId):
     alreadyBuono, alreadySemiBuono = (None, None)
     part_timer = True if request.user.groups.filter(
         name='part_timer').exists() else False
+    appealPoints = AppealPoint.objects.order_by('id').select_related()
     try:
+        i = 0
+        for obj in appealPoints:
+            if obj.id == appealPoint.id:
+                prevAp = appealPoints[i - 1]
+            i += 1
         prevAp = AppealPoint.objects.get(pk=appealPoint.id - 1)
-    except ObjectDoesNotExist:
+    except:
         pass
     try:
-        nextAp = AppealPoint.objects.get(pk=appealPoint.id + 1)
-    except ObjectDoesNotExist:
+        i = 0
+        for obj in appealPoints:
+            if obj.id == appealPoint.id:
+                nextAp = appealPoints[i + 1]
+            i += 1
+    except:
         pass
     if request.user.id == appealPoint.id:
         comments = Comment.objects.filter(
