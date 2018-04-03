@@ -14,7 +14,7 @@ isVoteTerm = date(2018, 4, 4) <= date.today()
 
 @login_required
 def index(request):
-    appealPoints = AppealPoint.objects.order_by('-id').select_related()
+    appealPoints = AppealPoint.objects.order_by('id').select_related()
     commitedBuono = True
     commitedSemiBuono = True
     mineId = None
