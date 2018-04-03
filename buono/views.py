@@ -59,11 +59,11 @@ def detail(request, appealPointId):
     part_timer = True if request.user.groups.filter(
         name='part_timer').exists() else False
     try:
-        prevAp = AppealPoint.objects.get(pk=appealPoint.id + 1)
+        prevAp = AppealPoint.objects.get(pk=appealPoint.id - 1)
     except ObjectDoesNotExist:
         pass
     try:
-        nextAp = AppealPoint.objects.get(pk=appealPoint.id - 1)
+        nextAp = AppealPoint.objects.get(pk=appealPoint.id + 1)
     except ObjectDoesNotExist:
         pass
     if request.user.id == appealPoint.id:
